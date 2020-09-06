@@ -1,9 +1,8 @@
+import conf
 import click
 from flask.cli import with_appcontext
 from google.cloud import bigquery
 from google.cloud.bigquery.dataset import DatasetReference
-
-TABLE_PREFIX = "gsc_"
 
 
 @click.command('load_gbq', help="Load Google Big Query from Google Cloud Storage")
@@ -12,7 +11,7 @@ TABLE_PREFIX = "gsc_"
 @click.argument('gcs_dir')
 @with_appcontext
 def load_gbq(date, data_set_id, gcs_dir):
-    table_name = file_name = TABLE_PREFIX + date.replace("-", "")
+    table_name = file_name = conf.TABLE_PREFIX + date.replace("-", "")
     client = bigquery.Client()
     data_set_ref = DatasetReference.from_string(data_set_id)
     job_config = bigquery.LoadJobConfig()

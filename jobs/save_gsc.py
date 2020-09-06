@@ -1,3 +1,4 @@
+import conf
 import click
 from flask.cli import with_appcontext
 from googleapiclient.discovery import build
@@ -23,7 +24,6 @@ class URL(click.ParamType):
         return {"value": value,
                 "parse_result": parse_result}
 
-CSV_PREFIX = "gsc_"
 SCOPES = ['https://www.googleapis.com/auth/webmasters.readonly']
 
 
@@ -61,7 +61,7 @@ def save_gsc(gsc_property_name, gsc_credentials_path, date, bucket_name, file_di
 
     client = storage.Client()
     bucket = client.get_bucket(bucket_name)
-    file_name = CSV_PREFIX + date.replace("-", "") + ".csv"
+    file_name = conf.CSV_PREFIX + date.replace("-", "") + ".csv"
     blob = bucket.blob(file_dir_name + file_name)
     blob.upload_from_filename(filename=temp_file_name)
 
