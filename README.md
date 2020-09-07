@@ -118,7 +118,7 @@ toolHome="/home/jobuser/tools/gsc-to-gbq"
 
 prepareRun() {
   cd $toolHome
-  source /home/gce_jobuser/venv/gsc_to_gbq/bin/activate
+  source /home/jobuser/venv/gsc_to_gbq/bin/activate
   export FLASK_APP=cli
   export GOOGLE_APPLICATION_CREDENTIALS=./credentials.json
 }
